@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 
+//what info is saved for the user
 const UserSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
   email: { type: String, unique: true },
@@ -15,6 +16,10 @@ const UserSchema = new mongoose.Schema({
   if (!user.isModified('password')) { return next() }
   bcrypt.genSalt(10, (err, salt) => {
     if (err) { return next(err) }
+    //bcrypt hashes (or "salts") the password 
+    //ie, does fancy math on it and gives what looks like a random jumbled string
+    //doesn't store the password in plaintext, only the hash!
+    //don';t worry about this, don't need to write from scratch!
     bcrypt.hash(user.password, salt, (err, hash) => {
       if (err) { return next(err) }
       user.password = hash

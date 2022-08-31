@@ -9,6 +9,7 @@ const TodoSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  // store userID in the DB when they add a new todo!
   userId: {
     type: String,
     required: true
